@@ -2,8 +2,8 @@
 
 public class AddCapsuleDto
 {
-    public DateTime ExpireDate { get; set; }
+    public DateTime LockDate { get; set; }
     public required string CapsuleName { get; set; }
-    public string? CapsuleData { get; set; }
+    public string? CapsuleText { get; set; }
     public byte[]? Image { get; set; }
 }

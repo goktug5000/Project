@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Project.Data;
@@ -49,6 +50,19 @@ app.MapGet("users/me", async (ClaimsPrincipal claims, ApplicationDbContext conte
     string userId = claims.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
     var user = await context.Users.FindAsync(userId);
     return user is not null ? Results.Ok(user) : Results.NotFound();
+});
+
+app.MapGet("users/getAll", async (ApplicationDbContext context) =>
+{
+    var users = context.Users.Select(x => new { x.Id, x.UserName }).ToList();
+    return Results.Ok(users);
+});
+
+app.MapGet("/logout", async (HttpContext httpContext) =>
+{
+    await httpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
+
+    return Results.Ok(new { Message = "Logout successful." });
 });
 
 app.UseAuthorization();
