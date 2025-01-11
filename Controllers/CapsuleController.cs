@@ -220,22 +220,22 @@ public class CapsuleController : ControllerBase
         return Ok("Kapsül açık");
     }
 
-    [HttpPut]
-    [Route("Search/{key:string}")]
-    public IActionResult UpdateCapsuleById(string key)
-    {
-        var loggedUserId = User.GetUserId();
-        var capsule = _dbContext.Capsules
-            .Where(x => 
-            (x.CapsuleData.CapsuleText.Contains(key) || x.CapsuleName.Contains(key))
-            && x.OwnerId == loggedUserId)?.Select(x => new { x.Id, x.CapsuleName }).ToList();
-        if (capsule == null)
-        {
-            return NotFound();
-        }
+    //[HttpPut]
+    //[Route("Search/{key:string}")]
+    //public IActionResult UpdateCapsuleById(string key)
+    //{
+    //    var loggedUserId = User.GetUserId();
+    //    var capsule = _dbContext.Capsules
+    //        .Where(x => 
+    //        (x.CapsuleData.CapsuleText.Contains(key) || x.CapsuleName.Contains(key))
+    //        && x.OwnerId == loggedUserId)?.Select(x => new { x.Id, x.CapsuleName }).ToList();
+    //    if (capsule == null)
+    //    {
+    //        return NotFound();
+    //    }
 
-        _dbContext.SaveChanges();
+    //    _dbContext.SaveChanges();
 
-        return Ok(capsule);
-    }
+    //    return Ok(capsule);
+    //}
 }
