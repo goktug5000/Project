@@ -4,7 +4,6 @@ using Project.Data;
 using Project.Extensions;
 using Project.Models;
 using Project.Models.Entities;
-using System.Linq;
 
 namespace Project.Controllers;
 
@@ -17,6 +16,13 @@ public class CapsuleController : ControllerBase
     public CapsuleController(ApplicationDbContext dbContext)
     {
         this._dbContext = dbContext;
+    }
+
+    [HttpGet]
+    [Route("Hello/")]
+    public IActionResult Hello()
+    {
+        return Ok("hello");
     }
 
     [HttpGet]
